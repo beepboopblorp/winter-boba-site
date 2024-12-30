@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Naughty or Nice?</title> 
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="bod">
+    <div id="scrolltext">
+        <h1>Have you been Naughty or Nice this year?</h1> <br>
+        <p> Enter your name below to find out if you are on Santa's nice list or naughty list!</p> <br>
+        <input type="text" id="yname" placeholder="Your Name"> <br>
+        <button id="go"> Go! </button>
+    </div>
+
+    <div class="presentborder1" id="presentborder1-1"></div>
+    <div class="presentborder1" id="presentborder1-2"></div>
+    <div class="presentborder1" id="presentborder1-3"></div>
+    <div class="presentborder1" id="presentborder1-4"></div>
+    <div class="presentborder1" id="presentborder1-5"></div>
+
+    <div class="presentborder2" id="presentborder2-1"></div>
+    <div class="presentborder2" id="presentborder2-2"></div>
+
+    <div class="presentborder3" id="presentborder3-1"></div>
+
+    <div class="presentborder4" id="presentborder4-1"></div>
+
+    <div class="presentborder5" id="presentborder5-1"></div>
+    <div class="presentborder5" id="presentborder5-2"></div>
+    <div class="presentborder5" id="presentborder5-3"></div>
+
+    <img id="img1" src="https://media.istockphoto.com/id/928803742/vector/pile-of-charcoal-graphite-coal.jpg?s=612x612&w=0&k=20&c=kxWskYqk4hVLIRg6GjM2rVZ7U01Z1G5Fw5fp5K0JVds="> 
+    <img id="img2" src="https://m.media-amazon.com/images/I/71Qd2MPL-bL._AC_UF1000,1000_QL80_.jpg"> 
+    <img id="img3" src="https://m.media-amazon.com/images/I/61lIoBS+xjL.jpg"> 
+    <img id="img4" src="https://m.media-amazon.com/images/I/71hs-euA1xL._AC_UF1000,1000_QL80_.jpg"> 
+    <img id="img5" src="https://i.etsystatic.com/8503027/r/il/1f3857/1925093016/il_1080xN.1925093016_9f5r.jpg"> 
+    <img id="img6" src="https://www.silverlineelectronics.in/cdn/shop/products/WideHero_768x7681_00fe5da4-d532-451b-a8a4-c04623611c7c.webp?v=1673261937">
+
+    <p id="imglabel"></p>
+
+    <button id="close" style="display: none;"> Close </button>
+    
+    <script>
+        let opened = false;
+        document.getElementById("close").addEventListener("click", ()=>{
+            for (i=0; i<document.getElementsByTagName("img").length; i++) {
+                document.getElementsByTagName("img")[i].style.display = "none";
+                document.getElementById("close").style.display = "none";
+                document.getElementById("imglabel").style.display = "none";
+                opened = false; 
+            }
+        })
+
+        document.getElementById("go").addEventListener("click", ()=>{
+            for (i=0; i<document.getElementsByTagName("img").length; i++) {
+                if (screen.width > screen.height) {
+                    document.getElementsByTagName("img")[i].style.height = "75%";
+                } else {
+                    document.getElementsByTagName("img")[i].style.width = "75%";
+                }
+            }
+            
+            let rand, rand2, bgimg, n;
+            let yname = document.getElementById("yname").value;
+
+            if (yname) {
+                rand = 0.5 //rand = Math.random() * 5;
+                if (rand < 1) {
+                    bgimg = 1;
+                    document.getElementById("bod").style.backgroundImage = 'url("https://img.freepik.com/premium-photo/warm-winter-evenings-cozy-living-room-adorned-with-glowing-christmas-tree-fireplace_1300239-5394.jpg")';
+                } else if (rand < 2) {
+                    bgimg = 2;
+                    document.getElementById("bod").style.backgroundImage = 'url("https://png.pngtree.com/thumb_back/fw800/background/20240923/pngtree-christmas-decorated-living-room-with-a-fireplace-tree-and-gifts-image_16247263.jpg")';
+                } else if (rand < 3 ) {
+                    bgimg = 3;
+                    document.getElementById("bod").style.backgroundImage = 'url("https://png.pngtree.com/thumb_back/fh260/background/20230928/pngtree-a-cozy-christmas-living-room-illuminated-by-the-fire-and-christmas-image_13514848.png")';
+                } else if (rand < 4) {
+                    bgimg = 4;
+                    document.getElementById("bod").style.backgroundImage = 'url("https://img.freepik.com/premium-photo/illustration-old-living-room-with-christmas-decor-with-fireplace-christmas-tree-gifts-ai_985124-8106.jpg")';
+                } else {
+                    bgimg = 5;
+                    document.getElementById("bod").style.backgroundImage = 'url("https://img.freepik.com/premium-photo/living-room-interior-with-decorated-fireplace-christmas-tree-generative-ai_786587-10835.jpg")';
+                }
+                document.getElementById("bod").style.backgroundColor = "black";
+                document.getElementById("scrolltext").style.display = "none";
+
+                for (i=0; i < document.getElementsByClassName("presentborder" + bgimg).length; i++) {
+                    if (document.getElementsByClassName("presentborder" + bgimg)[i]) {
+                        document.getElementsByClassName("presentborder" + bgimg)[i].style.display = "inline";
+                        document.getElementsByClassName("presentborder" + bgimg)[i].addEventListener("click", ()=>{
+                            if (!opened) {
+                                if (!n) {
+                                    rand2 = Math.random() * 100;
+                                } else if (n == "naughty") {
+                                    rand2 = Math.random() * 25;
+                                } else if (n == "nice") {
+                                    rand2 = (Math.random() * 75) + 25;
+                                }
+
+                                if (rand2 < 25) {
+                                    document.getElementById("img1").style.display = "inline";
+                                    document.getElementById("close").style.display = "inline";
+                                    document.getElementById("imglabel").style.display = "inline";
+                                    document.getElementById("imglabel").style.left = "20%";
+                                    n = "naughty";
+                                    opened = true;
+                                    document.getElementById("imglabel").innerText = "Uh oh, you got coal! Looks like you were naughty this year!"
+                                } else if (rand2 < 40) {
+                                    document.getElementById("img2").style.display = "inline";
+                                    document.getElementById("close").style.display = "inline";
+                                    document.getElementById("imglabel").style.display = "inline";
+                                    document.getElementById("imglabel").style.left = "15%";
+                                    n = "nice";
+                                    opened = true;
+                                    document.getElementById("imglabel").innerText = "You got a sharkie rubber duck! Looks like you were nice this year!"
+                                } else if (rand2 < 55) {
+                                    document.getElementById("img3").style.display = "inline";
+                                    document.getElementById("close").style.display = "inline";
+                                    document.getElementById("imglabel").style.display = "inline";
+                                    document.getElementById("imglabel").style.left = "20%";
+                                    n = "nice";
+                                    opened = true;
+                                    document.getElementById("imglabel").innerText = "You got a github mug! Looks like you were nice this year!"
+                                } else if (rand2 < 70) {
+                                    document.getElementById("img4").style.display = "inline";
+                                    document.getElementById("close").style.display = "inline";
+                                    document.getElementById("imglabel").style.display = "inline";
+                                    document.getElementById("imglabel").style.left = "20%";
+                                    n = "nice";
+                                    opened = true;
+                                    document.getElementById("imglabel").innerText = "You got a blahaj! Looks like you were nice this year!"
+                                } else if (rand2 < 85) {
+                                    document.getElementById("img5").style.display = "inline";
+                                    document.getElementById("close").style.display = "inline";
+                                    document.getElementById("imglabel").style.display = "inline";
+                                    document.getElementById("imglabel").style.left = "15%";
+                                    n = "nice";
+                                    opened = true;
+                                    document.getElementById("imglabel").innerText = "You got pcb earrings! Looks like you were nice this year!"
+                                } else {
+                                    document.getElementById("img6").style.display = "inline";
+                                    document.getElementById("close").style.display = "inline";
+                                    document.getElementById("imglabel").style.display = "inline";
+                                    document.getElementById("imglabel").style.left = "13%";
+                                    n = "nice";
+                                    opened = true;
+                                    document.getElementById("imglabel").innerText = "You got a raspberry pi camera! Looks like you were nice this year!"
+                                }
+                            }
+                        })
+                    }
+                }
+            } else {
+                alert("Please enter your name.");
+            }
+        })
+    </script>
+</body>
+</html>
+
+<style>
+    html {
+        margin: 0;
+        border: 0;
+        padding: 0;
+    }
+
+    @font-face {
+    font-family: "Miraculous_Christmas";
+    src: url("Miraculous&Christmas.ttf") format("truetype");
+    }
+
+    #bod {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: contain;
+        background-color: cornflowerblue;
+        background-position: center center;
+        text-align: center;
+        font-family: "Miraculous_Christmas";
+        background-image: url("https://i.pinimg.com/originals/d4/d9/88/d4d988b7db2e6ed850e3de1cf63eae37.png");
+    }
+
+    #scrolltext {
+        border: none;
+        position: absolute;
+        top: 15%;
+        left: 37%;
+        width: 27%;
+        height: 70%;
+        color: cornflowerblue;
+        padding: 0;
+        margin: 0;
+        z-index: 3;
+    }
+
+    #imglabel {
+        color: blue;
+        position: absolute;
+        bottom: 10%;
+        text-align: center;
+        z-index: 7;
+        font-size: 60px;
+        background-color: #f9e4bc;
+    }
+
+    h1 {
+        font-size: 60px;
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+        line-height: 55px;
+    }
+
+    p {
+        font-size: 45px;
+        margin: 0;
+        padding: 0;
+        line-height: 40px;
+    }
+
+    img {
+        z-index: 5;
+        position: absolute;
+        transform: translate(-45%);
+        display: none;
+    }
+
+    input {
+        width: 75%;
+        height: 45px;
+        font-family: "Miraculous_Christmas";
+        font-size: 40px;
+        text-align: center;
+        transform: translate(-5%);
+    }
+
+    button {
+        border-radius: 5px;
+        padding-left: 5%;
+        padding-right: 5%;
+        border-color: cornflowerblue;
+        margin-top: 2.5%;
+        font-size: 30px;
+        color: cornflowerblue;
+        font-family: "Miraculous_Christmas";
+    }
+
+    #close {
+        position: absolute;
+        z-index: 7;
+        bottom: 2.5%;
+        transform: translate(-40%);
+    }
+
+    .presentborder1 {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        display: none;
+    }
+
+    .presentborder2 {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        display: none;
+    }
+
+    .presentborder3 {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        display: none;
+    }
+    
+    .presentborder4 {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        display: none;
+    }
+
+    .presentborder5 {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        display: none;
+    }
+
+    #presentborder1-1 {
+        right: 0;
+        top: 63%;
+        width: 30%;
+        height: 16%;
+    }
+
+    #presentborder1-2 {
+        right: 35%;
+        top: 47%;
+        width: 13%;
+        height: 9%;
+    }
+
+    #presentborder1-3 {
+        left: 0;
+        top: 24%;
+        width: 10%;
+        height: 8%;
+    }
+
+    #presentborder1-4 {
+        left: 37%;
+        top: 65%;
+        width: 7%;
+        height: 7%;
+    }
+
+    #presentborder1-5 {
+        left: 15%;
+        top: 35%;
+        width: 30%;
+        height: 22%;
+    }
+
+    #presentborder2-1 {
+        left: 10%;
+        top: 24%;
+        width: 35%;
+        height: 28%;
+    }
+
+    #presentborder2-2 {
+        right: 0%;
+        top: 54%;
+        width: 60%;
+        height: 35%;
+    }
+
+    #presentborder3-1 {
+        left: 29%;
+        top: 59%;
+        width: 29%;
+        height: 19%;
+    }
+
+    #presentborder4-1 {
+        left: 0%;
+        bottom: 0%;
+        width: 99.5%;
+        height: 37%;
+    }
+
+    #presentborder5-1 {
+        left: 20%;
+        top: 38%;
+        width: 17%;
+        height: 6%;
+    }
+
+    #presentborder5-2 {
+        left: 19%;
+        top: 70%;
+        width: 10%;
+        height: 12%;
+    }
+
+    #presentborder5-3 {
+        left: 40%;
+        top: 67%;
+        width: 35%;
+        height: 17%;
+    }
+</style>
+
